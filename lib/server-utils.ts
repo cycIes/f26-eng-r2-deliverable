@@ -8,7 +8,7 @@ import "server-only";
 import { type Database } from "./schema";
 
 export const createServerSupabaseClient = cache(async () => {
-  const cookieStore = await Promise.resolve(cookies());
+  const cookieStore = await cookies();
   const supabase = createServerClient<Database>(env.NEXT_PUBLIC_SUPABASE_URL, env.NEXT_PUBLIC_SUPABASE_ANON_KEY, {
     cookies: {
       get(name: string) {
