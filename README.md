@@ -106,8 +106,8 @@ git clone git@github.com:hcs-t4sg/f25-eng-r2-deliverable.git
 
 2. There is a `.env.example` file in your local project directory (e.g. in VSCode). Duplicate it (into the same directory) and rename to `.env`. Inside `.env`, set the following variables according to your Supabase project settings:
 
-   - `NEXT_SUPABASE_URL`: From Project Settings > Data API > Project URL.
-   - `NEXT_SUPABASE_ANON_KEY`: From Project Settings > API Keys > Legacy API Keys > `anon` `public`.
+   - `NEXT_PUBLIC_SUPABASE_URL`: From Project Settings > Data API > Project URL.
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: From Project Settings > API Keys > Legacy API Keys > `anon` `public`.
    - `SECRET_SUPABASE_CONNECTION_STRING`: Project Overview > Connect (in the nav bar)> Direct connection. Replace `[YOUR-PASSWORD]` with your database password.
      - If you insist on using special characters in your password you will need to replace them with the **percent-encoded** version ([see this reference](https://stackoverflow.com/a/76551917))
 
@@ -115,8 +115,8 @@ git clone git@github.com:hcs-t4sg/f25-eng-r2-deliverable.git
 
    ```shell
    # Some other comments above
-   NEXT_SUPABASE_URL="https://abcdefghijklmnopqrst.supabase.co"
-   NEXT_SUPABASE_ANON_KEY="longlonglongstring"
+   NEXT_PUBLIC_SUPABASE_URL="https://abcdefghijklmnopqrst.supabase.co"
+   NEXT_PUBLIC_SUPABASE_ANON_KEY="longlonglongstring"
    SECRET_SUPABASE_CONNECTION_STRING="postgresql://postgres:YourDatabasePasswordHere@db.abcdefghijklmnopqrst.supabase.co:5432/postgres"
    ```
 
