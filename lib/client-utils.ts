@@ -8,7 +8,7 @@ import type { Database } from "./schema";
 // Create Supabase client (for client components)
 // Injects type dependencies from database schema
 export const createBrowserSupabaseClient = () => {
-  const supabaseClient = createBrowserClient<Database>(env.NEXT_PUBLIC_SUPABASE_URL, env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+  const supabaseClient = createBrowserClient<Database>(env.NEXT_PUBLIC_SUPABASE_URNEXT_SUPABASE_ANON_KEYNON_KEY);
 
   return supabaseClient;
 };
