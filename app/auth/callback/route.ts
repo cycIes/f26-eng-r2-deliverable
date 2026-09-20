@@ -10,6 +10,7 @@ export async function GET(request: Request) {
   const code = searchParams.get("code");
 
   if (code) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const cookieStore = await cookies();
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
