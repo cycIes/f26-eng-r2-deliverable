@@ -53,12 +53,12 @@ export default function AnimalSpeedGraph() {
 
     // Set up chart dimensions and margins
     const containerWidth = graphRef.current?.clientWidth ?? 800;
-    const containerHeight = graphRef.current?.clientHeight ?? 500;
+    const containerHeight = graphRef.current?.clientHeight ?? 600;
 
     // Set up chart dimensions and margins
     const width = Math.max(containerWidth, 600); // Minimum width of 600px
     const height = Math.max(containerHeight, 420); // Minimum height of 400px
-    const margin = { top: 70, right: 60, bottom: 160, left: 100 };
+    const margin = { top: 70, right: 60, bottom: 180, left: 100 };
 
     // Create the SVG element where D3 will draw the chart
     // https://github.com/d3/d3-selection
@@ -71,6 +71,7 @@ export default function AnimalSpeedGraph() {
     // https://github.com/d3/d3-scale#ordinal-scales
     // https://github.com/d3/d3-axis
 
+    const diets = ["Carnivore", "Herbivore", "Omnivore"];
     // const displayAnimals = ["Cheetah", "Pronghorn", "Brown Bear"];
     const displayAnimals = animalData.slice(0, 20).map((animal) => animal.name);
     const displayedData = animalData.filter((animal) => displayAnimals.includes(animal.name));
@@ -78,14 +79,14 @@ export default function AnimalSpeedGraph() {
 
     const x = scaleBand(displayAnimals, [margin.left, width - margin.right]);
     const y = scaleLinear([0, maxSpeed], [height - margin.bottom, margin.top]);
-    const color = scaleOrdinal(["Carnivore", "Herbivore", "Omnivore"], ["Salmon", "MediumSpringGreen", "Gold"]);
+    const color = scaleOrdinal(diets, ["Salmon", "MediumSpringGreen", "Gold"]);
 
     svg
       .append("g")
       .attr("transform", `translate(0,${height - margin.bottom})`)
       .call(axisBottom(x))
       .selectAll("text")
-      .attr("transform", "translate(-10,0)rotate(-45)")
+      .attr("transform", "translate(-10,0)rotate(-30)")
       .style("text-anchor", "end");
 
     svg.append("g").attr("transform", `translate(${margin.left},0)`).call(axisLeft(y));
@@ -112,12 +113,35 @@ export default function AnimalSpeedGraph() {
 
     svg
       .append("text")
-      .attr("x", -height / 2)
+      .attr("x", -height / 3)
       .attr("y", margin.left / 4)
       .attr("transform", "rotate(-90)")
       .attr("text-anchor", "middle")
       .attr("fill", "currentColor")
       .text("Speed (km/h)");
+
+    const size = 10;
+
+    svg
+      .selectAll("keys")
+      .data(diets)
+      .enter()
+      .append("rect")
+      .attr("x", width - margin.right - 100)
+      .attr("y", (diet) => margin.top - diets.indexOf(diet) * size * 2)
+      .attr("width", size)
+      .attr("height", size)
+      .attr("fill", (diet) => color(diet));
+
+    svg
+      .selectAll("labels")
+      .data(diets)
+      .enter()
+      .append("text")
+      .attr("x", width - margin.right - 100 + size * 2)
+      .attr("y", (diet) => margin.top - diets.indexOf(diet) * size * 2 + size)
+      .attr("fill", "currentColor")
+      .text((diet) => diet);
   }, [animalData]);
 
   // Return the graph
